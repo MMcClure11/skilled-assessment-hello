@@ -7,6 +7,10 @@
 // What kind of function would you set this up in?
 // componentDidMount()
 // make a fetch to that endpoint 
+
+//that data returns an array data.translations = ['Hola', 'Bonjour', 'Hello', etc.]
+// access that array and set your state of helloTranslations equal to that array
+//but exclude 'Hello'
 import React, { Component } from 'react'
 
 export default class Hello extends Component {
@@ -20,10 +24,11 @@ export default class Hello extends Component {
 
   componentDidMount() {
     fetch(this.props.helloTranslations)
-    //I did not remember the exact syntax for fetch, asked to use MDN, he said let's not since I most likely won't be able to in an interview setting
-    //he mentioned the first arg is the endpoint you want to hit, optional second arg of {} with all your headers such as 'POST' etc
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => {
+        let newArray = data.translations.filter(trans => trans !== 'Hello')
+        this.setState({helloTranslations: newArray})
+      })
   }
 
   render() {
