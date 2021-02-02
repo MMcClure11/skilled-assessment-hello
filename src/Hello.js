@@ -13,6 +13,8 @@
 //but exclude 'Hello'
 
 //display that data: <li><button>Hola</button></li>
+
+//write a function that when a button is clicked it console.logs that translation
 import React, { Component } from 'react'
 
 export default class Hello extends Component {
@@ -20,22 +22,26 @@ export default class Hello extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      helloTranslations: ['Hola', 'Bonjour', 'Konichiwa']
+      helloTranslations: []
     }
   }
 
-  // componentDidMount() {
-  //   fetch(this.props.helloTranslations)
-  //     .then(response => response.json())
-  //     .then(data => {
-  //       let newArray = data.translations.filter(trans => trans !== 'Hello')
-  //       this.setState({helloTranslations: newArray})
-  //     })
-  // }
+  componentDidMount() {
+    fetch(this.props.helloTranslations)
+      .then(response => response.json())
+      .then(data => {
+        let newArray = data.translations.filter(trans => trans !== 'Hello')
+        this.setState({helloTranslations: newArray})
+      })
+  }
+
+  logTranslation = (translation) => {
+    console.log(translation)
+  }
 
   renderTranslations = () => { 
     return this.state.helloTranslations.map( trans => 
-     <li key={ trans }><button>{ trans }</button></li> 
+     <li key={ trans }><button onClick={ () => this.logTranslation(trans) }>{ trans }</button></li> 
     )
   }
 
