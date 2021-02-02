@@ -11,6 +11,8 @@
 //that data returns an array data.translations = ['Hola', 'Bonjour', 'Hello', etc.]
 // access that array and set your state of helloTranslations equal to that array
 //but exclude 'Hello'
+
+//display that data: <li><button>Hola</button></li>
 import React, { Component } from 'react'
 
 export default class Hello extends Component {
@@ -18,23 +20,32 @@ export default class Hello extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      helloTranslations: []
+      helloTranslations: ['Hola', 'Bonjour', 'Konichiwa']
     }
   }
 
-  componentDidMount() {
-    fetch(this.props.helloTranslations)
-      .then(response => response.json())
-      .then(data => {
-        let newArray = data.translations.filter(trans => trans !== 'Hello')
-        this.setState({helloTranslations: newArray})
-      })
+  // componentDidMount() {
+  //   fetch(this.props.helloTranslations)
+  //     .then(response => response.json())
+  //     .then(data => {
+  //       let newArray = data.translations.filter(trans => trans !== 'Hello')
+  //       this.setState({helloTranslations: newArray})
+  //     })
+  // }
+
+  renderTranslations = () => { 
+    return this.state.helloTranslations.map( trans => 
+     <li key={ trans }><button>{ trans }</button></li> 
+    )
   }
 
   render() {
     return(
       <div>
         <h1>Hello</h1>
+        <ul>
+          { this.renderTranslations() }
+        </ul>
       </div>
     )
   }
