@@ -1,6 +1,3 @@
-//take this component and rewrite it as a functional component
-//you can either write over it directly or write a new component
-
 import React, { useState, useEffect } from 'react'
 
 const Hello = ({ helloTranslations }) => {
@@ -8,12 +5,8 @@ const Hello = ({ helloTranslations }) => {
   const [translations, setTranslations] = useState([])
 
   useEffect(() => {
-    fetch(helloTranslations)
-      .then(response => response.json())
-      .then(data => {
-        let newArray = data.translations.filter( trans => trans !== 'Hello')
-        setTranslations(newArray)
-      })
+    let newArray = helloTranslations.filter( trans => trans !== 'Hello')
+    setTranslations(newArray)
   }, [])
 
   const logTranslation = (translation) => {

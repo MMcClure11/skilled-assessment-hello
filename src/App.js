@@ -4,7 +4,7 @@ import Hello from './Hello'
 function App() {
   return (
     <div className="App">
-     <Hello />
+     <Hello helloTranslations={['Hola', 'Bonjour', 'Hello', 'Guten tag', 'Yasou', 'Shalom', 'Namaste']} />
     </div>
   );
 }
