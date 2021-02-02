@@ -3,13 +3,29 @@
 
 import React, { useState, useEffect } from 'react'
 
-const Hello = () => {
+const Hello = ({ helloTranslations }) => {
 
-  const [helloTranslations, setHelloTranslations] = useState([])
-  
+  const [translations, setTranslations] = useState([])
+
+  useEffect(() => {
+    fetch(helloTranslations)
+      .then(response => response.json())
+      .then(data => {
+        let newArray = data.translations.filter( trans => trans !== 'Hello')
+        setTranslations(newArray)
+      })
+  }, [])
+
+  const renderTranslations = () => {
+    return translations.map( trans => <li key={ trans }><button>{ trans} </button></li>)
+  }
+
   return(
     <>
       <h1>Hello</h1>
+      <ul>
+        { renderTranslations() }
+      </ul>
     </>
   )
 }
